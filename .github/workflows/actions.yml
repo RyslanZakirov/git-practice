@@ -1,22 +1,23 @@
-name: Github actions
-on:
-    push:
-        branches:
-            - dev-branch
+name: Work with Github actions
+on: ["push"]
 
-jobs:
-  build:
+jobs: 
+  task1:
     runs-on: ubuntu-latest
+    needs: []
+    steps: 
+      - name: List file directory
+        run: ls -lh
+        
+      - name: Make some changes
+        run: mkdir tmp_dir && cd tmp_dir
 
-    steps:
-      - name: test_name
-        run: ls -lah
-        # uses: 
+  task2:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: 
+        list: ["1", "2", "3"]
     
-  test_s:
-    runs-on: ubuntu-latest
-    needs: [build]
-
     steps:
-      - name: make_depend
-        run: ls -lhi
+      - name: work with matrix
+        run: echo ${{matrix.list}} 
