@@ -13,6 +13,7 @@ jobs:
         run: mkdir tmp_dir && cd tmp_dir
 
   task2:
+    needs: ["task1"]
     runs-on: ubuntu-latest
     strategy:
       matrix: 
@@ -21,3 +22,11 @@ jobs:
     steps:
       - name: work with matrix
         run: echo ${{matrix.list}} 
+
+  task3:
+    runs-on: ubuntu-latest
+    needs: [task2]
+
+    steps:
+      - name: Show list process
+        run: ps aux
